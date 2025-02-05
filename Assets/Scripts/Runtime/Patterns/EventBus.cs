@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -26,6 +27,11 @@ namespace Nara.Patterns
         static void Clear()
         {
             bindings.Clear();
+        }
+        public static void BindingAndRegister(Action<T> onEvent)
+        {
+            var binding = new EventBinding<T>(onEvent);
+            bindings.Add(binding);
         }
     }
     public interface IEvent
