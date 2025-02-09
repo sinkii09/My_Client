@@ -1,3 +1,4 @@
+using Nara.Core.Architecture;
 using System;
 using System.Collections.Generic;
 using UnityEditor;
@@ -33,10 +34,6 @@ namespace Nara.Patterns
             var binding = new EventBinding<T>(onEvent);
             bindings.Add(binding);
         }
-    }
-    public interface IEvent
-    {
-
     }
 }
 

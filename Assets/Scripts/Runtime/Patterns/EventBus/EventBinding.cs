@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Nara.Core.Architecture;
+using System;
 
 namespace Nara.Patterns
 {
