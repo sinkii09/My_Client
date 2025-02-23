@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
 using Nara.Core;
 using Nara.Core.Architecture;
+using Nara.Game;
 public class Test : MonoBehaviour
 {
     EventBinding<TestEvent> binding;

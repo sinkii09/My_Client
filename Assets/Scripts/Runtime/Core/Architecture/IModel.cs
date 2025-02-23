@@ -6,7 +6,7 @@
         void Init();
         void Terminate();
     }
-    public abstract class Model : IModel
+    public abstract class AbstractModel : IModel
     {
         public bool Initialized { get; set;}
 

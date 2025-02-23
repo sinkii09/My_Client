@@ -18,8 +18,16 @@ namespace Nara.Core.Architecture
     
         void SendCommand<T>(T command) where T : ICommand;
         TResult SendCommand<TResult>(ICommand<TResult> command);
+        TResult SendQuery<TResult>(IQuery<TResult> query);
 
     }
+    /// <summary>
+    /// This class provides a centralized way to manage and access various systems, models, controllers, and utilities
+    /// within the application. It leverages the Singleton pattern to ensure a single instance throughout the application
+    /// lifecycle and uses a Service Locator to manage dependencies and service registrations.
+    /// </summary>
+    /// <typeparam name="T">The type of the derived application class.</typeparam>
+    
     public abstract class App<T> : Singleton<T>, IApplication where T : App<T>
     {
         private bool initialized;
@@ -108,10 +116,7 @@ namespace Nara.Core.Architecture
             serviceLocator.Register<TUtility>(utility);
         }
 
-        TModel IApplication.GetModel<TModel>()
-        {
-            return serviceLocator.Get<TModel>();
-        }
+        TModel IApplication.GetModel<TModel>() => serviceLocator.Get<TModel>();
 
         TSystem IApplication.GetSystem<TSystem>()
         {
@@ -136,6 +141,11 @@ namespace Nara.Core.Architecture
         public TResult SendCommand<TResult>(ICommand<TResult> command)
         {
             return command.Execute();
+        }
+
+        public TResult SendQuery<TResult>(IQuery<TResult> query)
+        {
+            return query.Do();
         }
     }
 }

@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-namespace Nara.Core
+namespace Nara.Game
 {
     public class Boostraper : MonoBehaviour
     {
-        private void Start()
+        private void Awake()
         {
             GameApp.Instance.StartGame();
         }

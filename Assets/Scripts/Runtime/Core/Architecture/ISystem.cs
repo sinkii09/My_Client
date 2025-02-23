@@ -10,7 +10,7 @@ namespace Nara.Core.Architecture
         bool Init();
         void Terminate();
     }
-    public abstract class System : ISystem
+    public abstract class BaseSystem : ISystem
     {
         public bool Initialized { get; set; }
 
@@ -21,10 +21,6 @@ namespace Nara.Core.Architecture
         {
 
         }
-    }
-    public interface IQuery
-    {
-        void Execute();
     }
     public interface IEvent
     {
