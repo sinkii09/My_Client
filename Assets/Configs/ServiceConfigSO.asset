@@ -19,6 +19,7 @@ MonoBehaviour:
   - rid: 3199699991857725528
   - rid: 3199699991857725529
   - rid: 3199699991857725530
+  - rid: 3199699991857725625
   references:
     version: 2
     RefIds:
@@ -36,4 +37,7 @@ MonoBehaviour:
       data: 
     - rid: 3199699991857725530
       type: {class: ResourceSystem, ns: Nara.Game.System, asm: Assembly-CSharp}
+      data: 
+    - rid: 3199699991857725625
+      type: {class: EventBusSystem, ns: Nara.System, asm: Assembly-CSharp}
       data: 

@@ -7,24 +7,30 @@ using System.Threading.Tasks;
 using Nara.Core;
 using Nara.Core.Architecture;
 using Nara.Game;
-public class Test : MonoBehaviour
+using Nara.System;
+public class Test : NaraBehaviour
 {
     EventBinding<TestEvent> binding;
 
-    private void OnEnable()
+    private EventBus _eventBus;
+    protected override void LateStart()
     {
-        //binding = new EventBinding<TestEvent>(OnTestEvent);
-        //EventBus<TestEvent>.Register(binding);
-        EventBus<TestEvent>.BindingAndRegister(OnTestEvent);
+        binding = new EventBinding<TestEvent>(OnTestEvent);
 
+        _eventBus = GameApp.Inteface.GetSystem<EventBus>();
+        _eventBus.Register(binding);
+    }
+    private void OnDestroy()
+    {
+        _eventBus.Unregister(binding);
     }
     [Button]
     public void Test_RaiseEvent()
     {
-        EventBus<TestEvent>.Raise(new TestEvent
-        {
-            name = "Test 111111",
-        }); 
+        //EventBus<TestEvent>.Raise(new TestEvent
+        //{
+        //    name = "Test 111111",
+        //}); 
     }
     void OnTestEvent(TestEvent testEvent)
     {

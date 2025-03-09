@@ -1,4 +1,5 @@
 using Nara.Core.Architecture;
+using Nara.Utils;
 using System;
 using System.Collections.Generic;
 using UnityEditor;
@@ -6,14 +7,14 @@ using UnityEngine;
 
 namespace Nara.Patterns
 {
-    public static class EventBus<T> where T : IEvent
+    public class EventBus<T> where T : IEvent
     {
-        static readonly HashSet<IEventBinding<T>> bindings = new HashSet<IEventBinding<T>>();
+        readonly HashSet<IEventBinding<T>> bindings = new HashSet<IEventBinding<T>>();
     
-        public static void Register(EventBinding<T> binding) => bindings.Add(binding);
-        public static void Unregister(EventBinding<T> binding) => bindings.Remove(binding); 
+        public void Register(EventBinding<T> binding) => bindings.Add(binding);
+        public void Unregister(EventBinding<T> binding) => bindings.Remove(binding); 
     
-        public static void Raise(T @event)
+        public void Raise(T @event)
         {
             var snapshot = new HashSet<IEventBinding<T>>(bindings);
 
@@ -25,11 +26,11 @@ namespace Nara.Patterns
                 }
             }
         }
-        static void Clear()
+        public  void Clear()
         {
             bindings.Clear();
         }
-        public static void BindingAndRegister(Action<T> onEvent)
+        public void BindingAndRegister(Action<T> onEvent)
         {
             var binding = new EventBinding<T>(onEvent);
             bindings.Add(binding);

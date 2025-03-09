@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="container-base" style="flex-grow: 1;">
+        <ui:VisualElement name="background" style="flex-grow: 1;" />
+        <ui:Label text="Title" name="title-label" style="position: absolute; top: 25%; left: auto; right: auto; bottom: auto; align-self: center; font-size: 50px;" />
+        <ui:Button text="Start" enabled="true" name="start-btn" style="position: absolute; align-items: auto; align-self: center; align-content: center; flex-grow: 0; top: 50%; justify-content: flex-start;" />
+    </ui:VisualElement>
+</ui:UXML>

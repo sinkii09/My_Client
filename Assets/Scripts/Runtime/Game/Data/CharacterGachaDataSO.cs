@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Nara.Game.Data
 {
-    [CreateAssetMenu(fileName = "CharacterGachaData", menuName = "Nara/CharacterGachaData")]
+    [CreateAssetMenu(fileName = "CharacterGachaData", menuName = "Nara/Game/CharacterGachaData")]
     public class CharacterGachaDataSO : ScriptableObject
     {
         public List<Character> Pool;
