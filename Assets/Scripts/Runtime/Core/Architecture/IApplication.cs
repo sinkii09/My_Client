@@ -7,10 +7,10 @@ namespace Nara.Core.Architecture
 {
     public interface IApplication
     {
-        void RegisterSystem<TSystem>(TSystem system) where TSystem : ISystem;
-        void RegisterModel<TModel>(TModel model) where TModel : IModel;
-        void RegisterController<TController>(TController controller) where TController : IController;
-        void RegisterUtility<TUtility>(TUtility utility) where TUtility : IUtility;
+        void RegisterService(object service);
+        void RegisterSystem<TSystem>(TSystem system) where TSystem : class, ISystem;
+        void RegisterModel<TModel>(TModel model) where TModel : class, IModel;
+        void RegisterUtility<TUtility>(TUtility utility) where TUtility : class, IUtility;
 
         TSystem GetSystem<TSystem>() where TSystem : class, ISystem;
         TModel GetModel<TModel>() where TModel : class, IModel;
@@ -30,7 +30,6 @@ namespace Nara.Core.Architecture
     
     public abstract class App<T> : Singleton<T>, IApplication where T : App<T>
     {
-        private bool initialized;
         private ServiceLocator serviceLocator = new ServiceLocator();
         public static IApplication Inteface
         {
@@ -39,32 +38,54 @@ namespace Nara.Core.Architecture
                 return Instance;
             }
         }
-        protected override void Awake()
-        {
-            base.Awake();
-            if (!initialized)
-            {
-                Init();
-                foreach (var model in serviceLocator.GetServicesByType<IModel>().Where(model => !model.Initialized))
-                {
-                    model.Init();
-                    model.Initialized = true;
-                }
+        public bool Initialized { get; private set; }
 
-                foreach (var system in serviceLocator.GetServicesByType<ISystem>().Where(s => !s.Initialized))
-                {
-                    system.Init();
-                    system.Initialized = true;
-                }
+        public event Action OnAppInit;
 
-                initialized = true;
-            }
-        }
         private void OnDestroy()
         {
             Terminate();
         }
-        protected abstract void Init();
+
+
+        public void StartGame(ServiceConfigSO config)
+        {
+            if (!Initialized)
+            {
+                RegisterServices(config);
+                InitializeServices();
+                Initialized = true;
+                OnAppInit?.Invoke();
+            }
+        }
+        private void RegisterServices(ServiceConfigSO config)
+        {
+            if (config == null)
+            {
+                Debug.LogWarning($"[GameApp] Service Config is null, no service can be registered");
+                return;
+            }
+
+            config?.RegisterServices();
+            Debug.Log($"[GameApp] all services has been Registered");
+        }
+        private void InitializeServices()
+        {
+            foreach (var model in serviceLocator.GetServicesByType<IModel>().Where(model => !model.Initialized))
+            {
+                model.Init();
+                model.Initialized = true;
+                Debug.Log($"[App] Model of type {model.GetType().FullName} initialized");
+            }
+
+            foreach (var system in serviceLocator.GetServicesByType<ISystem>().Where(s => !s.Initialized))
+            {
+                system.Init();
+                system.Initialized = true;
+                Debug.Log($"[App] System of type {system.GetType().FullName} initialized");
+            }
+
+        }
         public void Terminate()
         {
             OnTerminate();
@@ -78,41 +99,37 @@ namespace Nara.Core.Architecture
             }
             serviceLocator.Clear();
         }
-        protected virtual void OnTerminate()
-        {
-
-        }
-        public void RegisterController<TController>(TController controller) where TController : IController
-        {
-            serviceLocator.Register<TController>(controller);
-            if (initialized)
-            {
-                
-            }
-        }
-
-        public void RegisterModel<TModel>(TModel model) where TModel : IModel
+        protected virtual void OnTerminate() { }
+        public void RegisterModel<TModel>(TModel model) where TModel : class, IModel
         {
             serviceLocator.Register<TModel>(model);
-            if (initialized)
+            if (Initialized)
             {
                 model.Init();
                 model.Initialized = true;
             }
         }
-
-        public void RegisterSystem<TSystem>(TSystem system) where TSystem : ISystem
+        public void RegisterService(object service)
         {
-            serviceLocator.Register<TSystem>(system);
-            if (initialized)
+            serviceLocator.Register(service);
+        }
+        public void RegisterSystem<TSystem>(TSystem system) where TSystem : class, ISystem
+        {
+            serviceLocator.Register(system);
+            if (Initialized)
             {
                 system.Init();
                 system.Initialized = true;
             }
         }
 
-        public void RegisterUtility<TUtility>(TUtility utility) where TUtility : IUtility
+        public void RegisterUtility<TUtility>(TUtility utility) where TUtility : class, IUtility
         {
+            if (serviceLocator.TryGet<TUtility>(out var _))
+            {
+                Debug.LogWarning($"[App] RegisterUtility: Utility of type {typeof(TUtility).FullName} already registered");
+                return;
+            }
             serviceLocator.Register<TUtility>(utility);
         }
 

@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 133fdbd3753b01d46ab1c6ada47dc310, type: 3}
+  m_Name: ServiceConfigSO
+  m_EditorClassIdentifier: 
+  _models:
+  - rid: 3199699991857725526
+  _systems:
+  - rid: 3199699991857725527
+  - rid: 3199699991857725528
+  - rid: 3199699991857725529
+  - rid: 3199699991857725530
+  references:
+    version: 2
+    RefIds:
+    - rid: 3199699991857725526
+      type: {class: GlobalData, ns: Nara.Game.Model, asm: Assembly-CSharp}
+      data: 
+    - rid: 3199699991857725527
+      type: {class: AgentManagementSystem, ns: Nara.Game.System, asm: Assembly-CSharp}
+      data: 
+    - rid: 3199699991857725528
+      type: {class: GachaSystem, ns: Nara.Game.System, asm: Assembly-CSharp}
+      data: 
+    - rid: 3199699991857725529
+      type: {class: HttpService, ns: Nara.Game.System, asm: Assembly-CSharp}
+      data: 
+    - rid: 3199699991857725530
+      type: {class: ResourceSystem, ns: Nara.Game.System, asm: Assembly-CSharp}
+      data: 

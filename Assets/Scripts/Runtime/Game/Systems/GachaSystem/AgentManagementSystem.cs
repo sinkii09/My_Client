@@ -11,10 +11,10 @@ namespace Nara.Game.System
     {
         public List<AgentData> AllAgentsData { get; private set; } = new();
 
-        private UserGlobalData userGlobalData;
+        private GlobalData userGlobalData;
         protected override bool OnInit()
         {
-            userGlobalData = GameApp.Inteface.GetModel<UserGlobalData>();
+            userGlobalData = GameApp.Inteface.GetModel<GlobalData>();
             return true;
         }
         public void UnlockAgent(AgentData data)

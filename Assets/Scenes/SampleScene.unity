@@ -809,6 +809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 008547c84b439c942a7a63ecb0a9fefd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serviceConfig: {fileID: 11400000, guid: 08b9aa930059d6e449bd739e9b6bf239, type: 2}
 --- !u!114 &1994926381
 MonoBehaviour:
   m_ObjectHideFlags: 0

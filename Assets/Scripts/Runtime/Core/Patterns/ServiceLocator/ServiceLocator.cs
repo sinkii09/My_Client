@@ -35,7 +35,18 @@ namespace Nara.Patterns
         public ServiceLocator Register<T>(T service)
         {
             var type = typeof(T);
-            if(services.TryAdd(type, service))
+            Debug.Log($"[Service_Locator] Register: Registering service of type {type.FullName}");
+            if (!services.TryAdd(type, service))
+            {
+                Debug.Log($"[Service_Locator] Register: Service of type {type.FullName} already registered");
+            }
+            return this;
+        }
+        public ServiceLocator Register(object service)
+        {
+            var type = service.GetType();
+            Debug.Log($"[Service_Locator] Register: Registering service of type {type.FullName}");
+            if (!services.TryAdd(type, service))
             {
                 Debug.Log($"[Service_Locator] Register: Service of type {type.FullName} already registered");
             }

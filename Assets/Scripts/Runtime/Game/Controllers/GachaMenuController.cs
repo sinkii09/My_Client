@@ -9,15 +9,13 @@ using UnityEngine;
 
 namespace Nara.Game.Controller
 {
-    public class GachaMenuController : MonoBehaviour, IController
+    public class GachaMenuController : NaraBehaviour, IController
     {
         [SerializeField] private CharacterGachaDataSO _characterGachaData;
         private GachaSystem _gachaSystem;
         // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
+        protected override void LateStart()
         {
-            GameApp.Instance.RegisterController(this);
-
             _gachaSystem = GameApp.Inteface.GetSystem<GachaSystem>();
             _gachaSystem.LoadCharacterPool(_characterGachaData.Pool,_characterGachaData.RarityProbabilities);
         }

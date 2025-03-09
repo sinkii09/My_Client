@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Nara.Game.Model
 {
-    public class UserGlobalData : AbstractModel
+    public class GlobalData : AbstractModel
     {
         public List<IAgentModel> Agents { get; private set; }
         protected override void OnInit()
