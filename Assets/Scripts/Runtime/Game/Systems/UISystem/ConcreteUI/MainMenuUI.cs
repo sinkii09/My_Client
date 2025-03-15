@@ -11,18 +11,24 @@ namespace Nara.System.UI
         public override UIType UIType => UIType.MainMenu;
 
         private VisualElement _startBtn;
+        private VisualElement _quitBtn;
 
         protected override void LateStart()
         {
             _startBtn = Root.Q<Button>(name: "start-btn");
+            _quitBtn = Root.Q<Button>(name: "quit-btn");
 
-
-            _startBtn.RegisterCallback<ClickEvent>(OnStartBtnClick);
+            _startBtn?.RegisterCallback<ClickEvent>(OnStartBtnClick);
+            _quitBtn?.RegisterCallback<ClickEvent>(OnQuitBtnClick);
         }
 
         private void OnStartBtnClick(ClickEvent evt)
         {
             GameApp.Inteface.GetSystem<EventBus>().Raise(new StartGameEvent());
+        }
+        private void OnQuitBtnClick(ClickEvent evt)
+        {
+            GameApp.Inteface.GetSystem<EventBus>().Raise(new QuitGameEvent());
         }
     }
 }

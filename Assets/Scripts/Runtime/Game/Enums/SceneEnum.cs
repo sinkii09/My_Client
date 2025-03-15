@@ -1,9 +1,10 @@
 ﻿namespace Nara.Game.Enum
 {
-    public enum SceneType
+    public enum SceneEnum
     {
         Logo,
         MainMenu,
+        MapSelection,
         Gameplay,
     }
 }

@@ -15,11 +15,13 @@ MonoBehaviour:
   _models:
   - rid: 3199699991857725526
   _systems:
+  - rid: 3199699991857725712
+  - rid: 3199699991857725530
+  - rid: 3199699991857725709
+  - rid: 3199699991857725529
   - rid: 3199699991857725527
   - rid: 3199699991857725528
-  - rid: 3199699991857725529
-  - rid: 3199699991857725530
-  - rid: 3199699991857725625
+  - rid: 3199700125802823773
   references:
     version: 2
     RefIds:
@@ -38,6 +40,12 @@ MonoBehaviour:
     - rid: 3199699991857725530
       type: {class: ResourceSystem, ns: Nara.Game.System, asm: Assembly-CSharp}
       data: 
-    - rid: 3199699991857725625
-      type: {class: EventBusSystem, ns: Nara.System, asm: Assembly-CSharp}
+    - rid: 3199699991857725709
+      type: {class: UISystem, ns: Nara.System.UI, asm: Assembly-CSharp}
+      data: 
+    - rid: 3199699991857725712
+      type: {class: EventBus, ns: Nara.System, asm: Assembly-CSharp}
+      data: 
+    - rid: 3199700125802823773
+      type: {class: MapSystem, ns: Nara.System.Map, asm: Assembly-CSharp}
       data: 

@@ -7,7 +7,7 @@ namespace Nara.System.UI
     public interface IUIHandler
     {
         UIType UIType { get; }
-        void ShowUI();
+        void ShowUI(object data = null);
         void HideUI();
     }
     public abstract class UIHandlerBase : NaraBehaviour, IUIHandler
@@ -18,13 +18,17 @@ namespace Nara.System.UI
         protected UIDocument UIDocument;
 
         protected VisualElement Root => UIDocument.rootVisualElement;
-        public virtual void ShowUI()
+        public void ShowUI(object data = null)
         {
             Root.style.display = DisplayStyle.Flex;
+            OnShowUI(data);
         }
-        public virtual void HideUI()
+        public void HideUI()
         {
             Root.style.display = DisplayStyle.None;
+            OnHideUI();
         }
+        private void OnShowUI(object data = null) { }
+        private void OnHideUI() { }
     }
 }

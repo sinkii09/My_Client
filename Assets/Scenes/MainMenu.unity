@@ -473,9 +473,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1994926379}
   - component: {fileID: 1994926380}
-  - component: {fileID: 1994926381}
-  - component: {fileID: 1994926382}
-  - component: {fileID: 1994926383}
   m_Layer: 0
   m_Name: Bootstrapper
   m_TagString: Untagged
@@ -511,43 +508,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serviceConfig: {fileID: 11400000, guid: 08b9aa930059d6e449bd739e9b6bf239, type: 2}
---- !u!114 &1994926381
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1994926377}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a65e337a4ff3f2c41ae762c3b872c458, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _characterGachaData: {fileID: 11400000, guid: b01bf6c56b02a8e4a8a92e5751977170, type: 2}
---- !u!114 &1994926382
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1994926377}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35818931fcfe1eb4281ab70a07f6a73b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1994926383
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1994926377}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd0bc42936b12f04e844182abb91009a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

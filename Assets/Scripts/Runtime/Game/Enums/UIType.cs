@@ -13,5 +13,6 @@ namespace Nara.Game.Enum
         CreditsMenu,
         LoadingScreen,
         LevelSelection,
+        Popup
     }
 }

@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0736a4e0ae2e9f4f8a85eec0ce22453, type: 3}
-  m_Name: UIConfigSO
+  m_Script: {fileID: 11500000, guid: 361bef3d640da71458b6368351c6e6aa, type: 3}
+  m_Name: MapData 2
   m_EditorClassIdentifier: 
-  _handlers:
-  - {fileID: 2694170620225488989, guid: 4476c021a27068b46b136c1f7e41537a, type: 3}
+  <MapType>k__BackingField: 0
+  <MapName>k__BackingField: Map1
+  <IsLocked>k__BackingField: 0
+  <MapSprite>k__BackingField: {fileID: 0}

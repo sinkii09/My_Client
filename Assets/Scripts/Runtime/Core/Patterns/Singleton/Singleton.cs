@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Nara.Patterns
 {
-    public class Singleton<T> : MonoBehaviour where T : Component
+    public class Singleton<T> : NaraBehaviour where T : Component
     {   
         protected static T instance;
         public static T Instance

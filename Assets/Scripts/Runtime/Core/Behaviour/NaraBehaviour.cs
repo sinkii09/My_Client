@@ -1,4 +1,5 @@
 using Nara.Game;
+using System;
 using UnityEngine;
 
 public class NaraBehaviour : MonoBehaviour
@@ -10,10 +11,12 @@ public class NaraBehaviour : MonoBehaviour
             LateStart();
             return;
         }
-        GameApp.Instance.OnAppInit += LateStart;
+        GameApp.Instance.OnAppInit += OnAppInit;
     }
-    void OnDestroy()
+
+    private void OnAppInit()
     {
+        LateStart();
         GameApp.Instance.OnAppInit -= LateStart;
     }
     protected virtual void LateStart()

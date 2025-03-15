@@ -1,5 +1,6 @@
 ﻿using Nara.Game;
 using Nara.Game.Enum;
+using Nara.Game.Extensions;
 using Nara.Patterns;
 using Nara.System.UI;
 using System;
@@ -9,7 +10,7 @@ namespace Nara.System.Scene
 {
     public class SceneMainMenuController : SceneControllerBase
     {
-        public override SceneType SceneType => SceneType.MainMenu;
+        public override SceneEnum SceneType => SceneEnum.MainMenu;
 
         private EventBus _eventBusSystem;
         private UISystem _uiSystem;
@@ -34,7 +35,7 @@ namespace Nara.System.Scene
 
         private void OnGameStart(StartGameEvent @event)
         {
-            SceneManager.LoadSceneAsync("Gameplay");
+            SceneManager.LoadSceneAsync(SceneTypeExtensions.GetSceneName(SceneEnum.MapSelection));
         }
     }
 }

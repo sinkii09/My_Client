@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Gameplay.unity
     guid: b0bb4fc3905ebc24086746c62c1bcacc
+  - enabled: 1
+    path: Assets/Scenes/MapSelection.unity
+    guid: 5ff803d001a14d643ba615886857bf16
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 6d1212b597862f54487a7fb9ec27cddd, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

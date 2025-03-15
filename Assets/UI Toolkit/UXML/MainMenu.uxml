@@ -1,7 +1,11 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <ui:VisualElement name="container-base" style="flex-grow: 1;">
-        <ui:VisualElement name="background" style="flex-grow: 1;" />
-        <ui:Label text="Title" name="title-label" style="position: absolute; top: 25%; left: auto; right: auto; bottom: auto; align-self: center; font-size: 50px;" />
-        <ui:Button text="Start" enabled="true" name="start-btn" style="position: absolute; align-items: auto; align-self: center; align-content: center; flex-grow: 0; top: 50%; justify-content: flex-start;" />
+    <ui:VisualElement name="container-base" picking-mode="Ignore" focusable="false" style="flex-grow: 1; top: 0; right: 0; bottom: 0; left: 0; flex-basis: 100%;">
+        <ui:VisualElement name="background" style="flex-grow: 1; position: relative; align-items: center; align-self: center; justify-content: center; top: auto; right: auto; bottom: auto; left: auto; flex-basis: 100%; width: 100%; height: 100%;">
+            <ui:Label text="Title" name="title-label" style="position: absolute; top: 25%; left: auto; right: auto; bottom: auto; align-self: center; font-size: 50px;" />
+            <ui:GroupBox style="justify-content: center; width: 100%; height: 50%; top: 25%;">
+                <ui:Button text="Start" enabled="true" name="start-btn" style="position: relative; align-items: auto; align-self: center; align-content: center; flex-grow: 0; top: auto; justify-content: flex-start;" />
+                <ui:Button text="Quit" enabled="true" name="quit-btn" style="position: relative; align-items: auto; align-self: center; align-content: center; flex-grow: 0; top: auto; justify-content: flex-start; bottom: auto;" />
+            </ui:GroupBox>
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
