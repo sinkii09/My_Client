@@ -10,7 +10,7 @@ namespace Nara.System.Scene
 {
     public class SceneMainMenuController : SceneControllerBase
     {
-        public override SceneEnum SceneType => SceneEnum.MainMenu;
+        public override SceneType SceneType => SceneType.MainMenu;
 
         private EventBus _eventBusSystem;
         private UISystem _uiSystem;
@@ -35,7 +35,7 @@ namespace Nara.System.Scene
 
         private void OnGameStart(StartGameEvent @event)
         {
-            SceneManager.LoadSceneAsync(SceneTypeExtensions.GetSceneName(SceneEnum.MapSelection));
+            SceneManager.LoadSceneAsync(SceneTypeExtensions.GetSceneName(SceneType.MapSelection));
         }
     }
 }

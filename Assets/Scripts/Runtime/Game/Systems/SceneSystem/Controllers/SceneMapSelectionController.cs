@@ -10,7 +10,7 @@ namespace Nara.System.Scene
 {
     public class SceneMapSelectionController : SceneControllerBase
     {
-        public override SceneEnum SceneType => SceneEnum.MapSelection;
+        public override SceneType SceneType => SceneType.MapSelection;
         private EventBus _eventBusSystem;
         private UISystem _uiSystem;
         private MapSystem _mapSystem;

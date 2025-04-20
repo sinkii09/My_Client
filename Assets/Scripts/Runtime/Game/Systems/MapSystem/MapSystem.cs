@@ -1,4 +1,5 @@
 using Nara.Core.Architecture;
+using Nara.Game.Enum;
 using Nara.System.Map;
 using NUnit.Framework;
 using System;
@@ -7,12 +8,6 @@ using UnityEngine;
 
 namespace Nara.System.Map
 {
-    public enum MapType
-    {
-        Map1,
-        Map2,
-        Map3,
-    }
     public interface IMap
     {
         MapData MapData { get; }

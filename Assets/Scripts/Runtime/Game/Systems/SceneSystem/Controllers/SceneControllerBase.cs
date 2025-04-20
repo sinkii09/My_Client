@@ -5,6 +5,6 @@ namespace Nara.System.Scene
 {
     public abstract class SceneControllerBase : NaraBehaviour
     {
-        public abstract SceneEnum SceneType { get; }
+        public abstract SceneType SceneType { get; }
     }
 }

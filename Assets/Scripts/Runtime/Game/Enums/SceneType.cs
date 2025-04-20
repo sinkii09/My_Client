@@ -1,6 +1,6 @@
 ﻿namespace Nara.Game.Enum
 {
-    public enum SceneEnum
+    public enum SceneType
     {
         Logo,
         MainMenu,

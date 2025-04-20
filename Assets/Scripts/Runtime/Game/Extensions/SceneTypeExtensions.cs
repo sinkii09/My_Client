@@ -4,17 +4,17 @@ namespace Nara.Game.Extensions
 {
     public static class SceneTypeExtensions
     {
-        public static string GetSceneName(SceneEnum sceneType)
+        public static string GetSceneName(SceneType sceneType)
         {
             switch (sceneType)
             {
-                case SceneEnum.Logo:
+                case SceneType.Logo:
                     return "Logo";
-                case SceneEnum.MainMenu:
+                case SceneType.MainMenu:
                     return "MainMenu";
-                case SceneEnum.MapSelection:
+                case SceneType.MapSelection:
                     return "MapSelection";
-                case SceneEnum.Gameplay:
+                case SceneType.Gameplay:
                     return "Gameplay";
                 default:
                     return "MainMenu";
