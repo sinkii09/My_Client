@@ -18,24 +18,28 @@ namespace Nara.System.Scene
         private EventBinding<StartGameEvent> _startGameEventBinding;
         protected override void LateStart()
         {
+
+            RegisterSystem();
+
             _startGameEventBinding = new EventBinding<StartGameEvent>(OnGameStart);
-
-
-            _eventBusSystem = GameApp.Inteface.GetSystem<EventBus>();
             _eventBusSystem.Register(_startGameEventBinding);
 
-
-            _uiSystem = GameApp.Inteface.GetSystem<UISystem>();
             _uiSystem.ShowUI(UIType.MainMenu);
         }
         void OnDestroy()
         {
             _eventBusSystem.Unregister(_startGameEventBinding);
         }
+        private void RegisterSystem()
+        {
+            _eventBusSystem = GameApp.Inteface.GetSystem<EventBus>();
+            _uiSystem = GameApp.Inteface.GetSystem<UISystem>();
+        }
 
         private void OnGameStart(StartGameEvent @event)
         {
-            SceneManager.LoadSceneAsync(SceneTypeExtensions.GetSceneName(SceneType.MapSelection));
+            //SceneManager.LoadSceneAsync(SceneTypeExtensions.GetSceneName(SceneType.MapSelection));
         }
+
     }
 }
