@@ -12,4 +12,64 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8e3298c45d68074c92638381dc6b469, type: 3}
   m_Name: UGUIConfigSO
   m_EditorClassIdentifier: 
-  <MainCanvas>k__BackingField: {fileID: 4674250549451272755, guid: cf4584dcaf40d2c488d5ede512e98318, type: 3}
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 8420400303032656832, guid: 12ae7b030ee671447b918a1713bbc005, type: 3}
+    - {fileID: -5017112719216284035, guid: eed96f20e5126c5458b5d511812c3218, type: 3}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: UIHandlers
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[Nara.Game.Enum.UIType, Assembly-CSharp],[Nara.System.UGUISystems.UIHandler,
+        Assembly-CSharp]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[Nara.Game.Enum.UIType,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 0
+    - Name: $v
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 9
+    - Name: $v
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 

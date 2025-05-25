@@ -56,7 +56,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 4|Nara.System.UGUISystem.UGUISystem, Assembly-CSharp
+      Data: 4|Nara.System.UGUISystems.UGUISystem, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 

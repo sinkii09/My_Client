@@ -20,10 +20,7 @@ public class Test : NaraBehaviour
         _eventBus = GameApp.Interface.GetSystem<EventBus>();
         //_eventBus.Register(binding);
     }
-    private void OnDestroy()
-    {
-        _eventBus.Unregister(binding);
-    }
+
     [Button]
     public void Test_RaiseEvent()
     {

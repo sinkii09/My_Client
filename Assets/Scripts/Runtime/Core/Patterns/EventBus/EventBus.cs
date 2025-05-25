@@ -7,27 +7,16 @@ using UnityEngine;
 
 namespace Nara.Patterns
 {
-    public class EventBus<T> where T : IEvent
+    public interface IEventBus
     {
-        readonly HashSet<IEventBinding<T>> bindings = new HashSet<IEventBinding<T>>();
-
+        void Clear();
+    }
+    public class EventBus<T> : IEventBus where T : IEvent
+    {
         private static Dictionary<Type, List<IEventBinding<T>>> _eventDict = new();
-    
-        public void Register(EventBinding<T> binding) => bindings.Add(binding);
-        public void Unregister(EventBinding<T> binding) => bindings.Remove(binding); 
     
         public void Raise(T @event)
         {
-            //var snapshot = new HashSet<IEventBinding<T>>(bindings);
-
-            //foreach (var item in snapshot)
-            //{
-            //    if (bindings.Contains(item))
-            //    {
-            //        item.OnEvent.Invoke(@event);
-            //    }
-            //}
-
             if (_eventDict.TryGetValue(typeof(T), out var bindings))
             {
                 foreach (var item in bindings)
@@ -38,7 +27,6 @@ namespace Nara.Patterns
         }
         public void Clear()
         {
-            bindings.Clear();
             _eventDict.Clear();
         }
         public void Register(Action<T> onEvent)
@@ -48,7 +36,6 @@ namespace Nara.Patterns
             if (!_eventDict.TryGetValue(typeof(T), out var bindings))
             {
                 _eventDict[typeof(T)] = new List<IEventBinding<T>>();
-                return;
             }
 
             _eventDict[typeof(T)].Add(binding);
@@ -61,9 +48,8 @@ namespace Nara.Patterns
                 {
                     if (binding.OnEvent == onEvent)
                     {
-                        binding.Remove(onEvent);
+                        bindings.Remove(binding);
                     }
-                    bindings.Remove(binding);
                 }
             }
         }

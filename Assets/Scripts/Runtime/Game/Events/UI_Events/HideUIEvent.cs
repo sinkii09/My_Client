@@ -1,6 +1,7 @@
 ﻿using Nara.Core.Architecture;
+using Nara.System.UGUISystems;
 
-namespace Nara.System.UGUISystem
+namespace Nara.Game.Event
 {
     public class HideUIEvent : IEvent
     {

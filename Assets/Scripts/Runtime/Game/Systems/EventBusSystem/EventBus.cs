@@ -2,13 +2,12 @@ using Nara.Core.Architecture;
 using Nara.Patterns;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 
 namespace Nara.System
 {
     public class EventBus : BaseSystem
     {
-        private Dictionary<Type, object> Buses = new Dictionary<Type, object>();
+        private Dictionary<Type, IEventBus> Buses = new Dictionary<Type, IEventBus>();
 
         protected override bool OnInit()
         {
@@ -24,7 +23,7 @@ namespace Nara.System
             {
                 Buses.Add(typeof(T), new EventBus<T>());
             }
-            return Buses[typeof(T)] as EventBus<T>;
+            return (EventBus<T>)Buses[typeof(T)];
         }
         public void Raise<T>(T @event) where T : IEvent
         {
@@ -41,17 +40,11 @@ namespace Nara.System
             var bus = GetBus<T>();
             bus?.Unregister(action);
         }
-        public void Unregister<T>(EventBinding<T> binding) where T : IEvent
-        {
-            var bus = GetBus<T>();
-            bus?.Unregister(binding);
-        }
         void Clear()
         {
             foreach (var bus in Buses.Values)
             {
-                var clearMethod = bus.GetType().GetMethod("Clear", BindingFlags.Static | BindingFlags.NonPublic);
-                clearMethod?.Invoke(null, null);
+                bus.Clear();
             }
             EventBusUtil.ClearAllBuses();
         }

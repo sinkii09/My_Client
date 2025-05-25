@@ -2,10 +2,11 @@ using Nara.Core.Architecture;
 using Nara.Game;
 using Nara.Game.Config;
 using Nara.Game.Enum;
+using Nara.Game.Event;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Nara.System.UGUISystem
+namespace Nara.System.UGUISystems
 {
     public class UGUISystem : BaseSystem
     {
@@ -14,7 +15,6 @@ namespace Nara.System.UGUISystem
 
         private UGUIConfig _uiConfig;
 
-        private Canvas _mainCanvas;
         private EventBus _eventBus;
         protected override bool OnInit()
         {
@@ -33,8 +33,6 @@ namespace Nara.System.UGUISystem
 
             _eventBus.Register<HideUIEvent>(HideUI);
             _eventBus.Register<ShowUIEvent>(ShowUI);
-
-            _mainCanvas = Object.Instantiate(_uiConfig.MainCanvas);
 
             return true;
         }
@@ -59,14 +57,14 @@ namespace Nara.System.UGUISystem
             if (!_uiPools.TryGetValue(uiType, out var pool))
             {
                 _uiPools[uiType] = new Stack<UIHandler>();
-                handler = Object.Instantiate(prefab, _mainCanvas.transform);
+                handler = Object.Instantiate(prefab);
             }
             else if (!pool.TryPop(out handler) || handler == null)
             {
-                handler = Object.Instantiate(prefab, _mainCanvas.transform);
+                handler = Object.Instantiate(prefab);
             }
 
-            handler.OnShow();
+            handler.Show(@event.Context);
 
             if (!_openUI.TryGetValue(uiType, out uiStack))
             {
@@ -92,7 +90,8 @@ namespace Nara.System.UGUISystem
                 return;
             }
 
-            handler.OnHide();
+            _openUI[handler.UIType].Pop();
+            handler.HideImmediately();
 
             if (_uiPools.TryGetValue(handler.UIType, out var pool))
             {
