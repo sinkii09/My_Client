@@ -18,7 +18,7 @@ namespace Nara.System.Scene
         private List<IMap> _maps = new List<IMap>();
         protected override void LateStart()
         {
-            _mapSystem = GameApp.Inteface.GetSystem<MapSystem>();
+            _mapSystem = GameApp.Interface.GetSystem<MapSystem>();
             DisplayMaps();
         }
 

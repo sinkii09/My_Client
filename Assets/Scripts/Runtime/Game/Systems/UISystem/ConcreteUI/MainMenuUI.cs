@@ -24,11 +24,11 @@ namespace Nara.System.UI
 
         private void OnStartBtnClick(ClickEvent evt)
         {
-            GameApp.Inteface.GetSystem<EventBus>().Raise(new StartGameEvent());
+            GameApp.Interface.GetSystem<EventBus>().Raise(new StartGameEvent());
         }
         private void OnQuitBtnClick(ClickEvent evt)
         {
-            GameApp.Inteface.GetSystem<EventBus>().Raise(new QuitGameEvent());
+            GameApp.Interface.GetSystem<EventBus>().Raise(new QuitGameEvent());
         }
     }
 }

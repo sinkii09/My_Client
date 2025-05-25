@@ -12,7 +12,7 @@ public class TestHttp : MonoBehaviour
     {
         var url = "https://jsonplaceholder.typicode.com/posts/1";
         //var url = "https://jsonplaceholderss.typicode.com/posts/1";
-        var response = await GameApp.Inteface.GetSystem<HttpService>().GetRequest(url);
+        var response = await GameApp.Interface.GetSystem<HttpService>().GetRequest(url);
         var data = await response.GetStringContentAsync();
         Debug.Log(data);
     }
@@ -21,7 +21,7 @@ public class TestHttp : MonoBehaviour
     {
         var url = "https://jsonplaceholder.typicode.com/posts";
         var content = new StringContent("{\"title\":\"foo\",\"body\":\"bar\",\"userId\":1}");
-        var response = await GameApp.Inteface.GetSystem<HttpService>().PostRequest(url, content);
+        var response = await GameApp.Interface.GetSystem<HttpService>().PostRequest(url, content);
         var data = await response.GetStringContentAsync();
         Debug.Log(data);
     }
@@ -41,7 +41,7 @@ public class TestHttp : MonoBehaviour
         root.AppendChild(body);
         root.AppendChild(userId);
         xml.AppendChild(root);
-        var response = await GameApp.Inteface.GetSystem<HttpService>().PostAsXmlAsync(url, xml);
+        var response = await GameApp.Interface.GetSystem<HttpService>().PostAsXmlAsync(url, xml);
         var data = await response.GetStringContentAsync();
         Debug.Log(data);
     }

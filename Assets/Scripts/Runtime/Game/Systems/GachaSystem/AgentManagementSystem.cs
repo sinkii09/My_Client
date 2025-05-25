@@ -14,7 +14,7 @@ namespace Nara.Game.System
         private GlobalData userGlobalData;
         protected override bool OnInit()
         {
-            userGlobalData = GameApp.Inteface.GetModel<GlobalData>();
+            userGlobalData = GameApp.Interface.GetModel<GlobalData>();
             return true;
         }
         public void UnlockAgent(AgentData data)
@@ -39,7 +39,7 @@ namespace Nara.Game.System
         }
         public async void LoadAllAgentDataAsync()
         {
-            AllAgentsData = await GameApp.Inteface.GetSystem<ResourceSystem>().GetAgentData();
+            AllAgentsData = await GameApp.Interface.GetSystem<ResourceSystem>().GetAgentData();
             foreach (var agent in AllAgentsData)
             {
                 Debug.Log(agent.Name);

@@ -31,10 +31,15 @@ namespace Nara.System
             var bus = GetBus<T>();
             bus?.Raise(@event);
         }
-        public void Register<T>(EventBinding<T> binding) where T : IEvent
+        public void Register<T>(Action<T> action) where T : IEvent
         {
             var bus = GetBus<T>();
-            bus?.Register(binding);
+            bus?.Register(action);
+        }
+        public void Unregister<T>(Action<T> action) where T : IEvent
+        {
+            var bus = GetBus<T>();
+            bus?.Unregister(action);
         }
         public void Unregister<T>(EventBinding<T> binding) where T : IEvent
         {

@@ -9,6 +9,7 @@ namespace Nara.Core.Architecture
 
         bool Init();
         void Terminate();
+        void Update();
     }
     public abstract class BaseSystem : ISystem
     {
@@ -16,6 +17,12 @@ namespace Nara.Core.Architecture
 
         public bool Init() => OnInit();
         public void Terminate() => OnTerminate();
+
+        public virtual void Update()
+        {
+
+        }
+
         protected abstract bool OnInit();
         protected virtual void OnTerminate()
         {

@@ -34,11 +34,25 @@ namespace Nara.Patterns
         }
         public ServiceLocator Register<T>(T service)
         {
-            var type = typeof(T);
-            Debug.Log($"[Service_Locator] Register: Registering service of type {type.FullName}");
-            if (!services.TryAdd(type, service))
+            var type = service.GetType();
+            Debug.Log($"[Service_Locator] Register: Registering service of type {type.ToString()}");
+
+            
+            if (typeof(ScriptableObject).IsAssignableFrom(type))
             {
-                Debug.Log($"[Service_Locator] Register: Service of type {type.FullName} already registered");
+                if (!services.TryAdd(type, service))
+                {
+                    Debug.Log($"[Service_Locator] Register: Service of type {type.FullName} already registered");
+                }
+            }
+            else
+            {
+                object instance = Activator.CreateInstance(type);
+
+                if (!services.TryAdd(type, instance))
+                {
+                    Debug.Log($"[Service_Locator] Register: Service of type {type.FullName} already registered");
+                }
             }
             return this;
         }

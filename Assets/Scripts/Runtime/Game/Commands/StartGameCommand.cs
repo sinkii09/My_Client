@@ -8,7 +8,7 @@ public class StartGameCommand : Command
 {
     protected override void OnExecute()
     {
-        GameApp.Inteface.GetSystem<EventBus>().Raise(new StartGameEvent());  
+        GameApp.Interface.GetSystem<EventBus>().Raise(new StartGameEvent());  
     }
 }
 public class StartGameEvent : IEvent

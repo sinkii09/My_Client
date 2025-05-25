@@ -10,7 +10,7 @@ namespace Nara.Game.Command
 
         public GachaCommandResult Execute()
         {
-            return GameApp.Inteface.GetSystem<GachaSystem>().Gacha();
+            return GameApp.Interface.GetSystem<GachaSystem>().Gacha();
         }
     }
     public class GachaCommandResult

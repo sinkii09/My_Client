@@ -21,10 +21,10 @@ namespace Nara.System.Scene
 
             RegisterSystem();
 
-            _startGameEventBinding = new EventBinding<StartGameEvent>(OnGameStart);
-            _eventBusSystem.Register(_startGameEventBinding);
+            //_startGameEventBinding = new EventBinding<StartGameEvent>(OnGameStart);
+            //_eventBusSystem.Register(_startGameEventBinding);
 
-            _uiSystem.ShowUI(UIType.MainMenu);
+            //_uiSystem.ShowUI(UIType.MainMenu);
         }
         void OnDestroy()
         {
@@ -32,8 +32,8 @@ namespace Nara.System.Scene
         }
         private void RegisterSystem()
         {
-            _eventBusSystem = GameApp.Inteface.GetSystem<EventBus>();
-            _uiSystem = GameApp.Inteface.GetSystem<UISystem>();
+            _eventBusSystem = GameApp.Interface.GetSystem<EventBus>();
+            //_uiSystem = GameApp.Interface.GetSystem<UISystem>();
         }
 
         private void OnGameStart(StartGameEvent @event)

@@ -1,4 +1,5 @@
-﻿using Nara.Patterns;
+﻿using Nara.Game.Config;
+using Nara.Patterns;
 using System;
 using System.Linq;
 using UnityEngine;
@@ -7,11 +8,13 @@ namespace Nara.Core.Architecture
 {
     public interface IApplication
     {
+        bool Initialized { get; }
         void RegisterService(object service);
+        void RegisterConfig<TConfig>(TConfig config) where TConfig : IConfig;
         void RegisterSystem<TSystem>(TSystem system) where TSystem : class, ISystem;
         void RegisterModel<TModel>(TModel model) where TModel : class, IModel;
         void RegisterUtility<TUtility>(TUtility utility) where TUtility : class, IUtility;
-
+        TConfig GetConfig<TConfig>() where TConfig : ScriptableObject, IConfig;
         TSystem GetSystem<TSystem>() where TSystem : class, ISystem;
         TModel GetModel<TModel>() where TModel : class, IModel;
         TUtility GetUtility<TUtility>() where TUtility : class, IUtility;
@@ -31,7 +34,7 @@ namespace Nara.Core.Architecture
     public abstract class App<T> : Singleton<T>, IApplication where T : App<T>
     {
         private ServiceLocator serviceLocator = new ServiceLocator();
-        public static IApplication Inteface
+        public static IApplication Interface
         {
             get
             {
@@ -42,32 +45,40 @@ namespace Nara.Core.Architecture
 
         public event Action OnAppInit;
 
+        public GlobalConfig GlobalConfig { get; private set; }
+
         private void OnDestroy()
         {
             Terminate();
         }
+        private void Update()
+        {
+            foreach (var system in serviceLocator.Services)
+            {
+                if (system is ISystem s && s.Initialized)
+                    s.Update();
+            }
+        }
 
-
-        public void StartGame(ServiceConfigSO config)
+        public void StartGame(GlobalConfig globalConfig)
         {
             if (!Initialized)
             {
-                RegisterServices(config);
+                GlobalConfig = globalConfig;
+                RegisterServices();
                 InitializeServices();
                 Initialized = true;
                 OnAppInit?.Invoke();
             }
         }
-        private void RegisterServices(ServiceConfigSO config)
+        private void RegisterServices()
         {
-            if (config == null)
+            if (GlobalConfig == null)
             {
                 Debug.LogWarning($"[GameApp] Service Config is null, no service can be registered");
                 return;
             }
-
-            config?.RegisterServices();
-            Debug.Log($"[GameApp] all services has been Registered");
+            GlobalConfig.RegisterServices();
         }
         private void InitializeServices()
         {
@@ -163,6 +174,15 @@ namespace Nara.Core.Architecture
         public TResult SendQuery<TResult>(IQuery<TResult> query)
         {
             return query.Do();
+        }
+        public void RegisterConfig<TConfig>(TConfig config) where TConfig : IConfig
+        {
+            serviceLocator.Register(config);
+        }
+
+        public TConfig GetConfig<TConfig>() where TConfig : ScriptableObject, IConfig
+        {
+            return serviceLocator.Get<TConfig>();
         }
     }
 }

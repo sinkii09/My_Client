@@ -7,6 +7,8 @@ namespace Nara.Patterns
     {
         public Action<T> OnEvent { get; set; }
         //public Action OnEventNoArgs { get; set; }
+        void Add(Action<T> onEvent);
+        void Remove(Action<T> onEvent);
     }
 
     public class EventBinding<T> : IEventBinding<T> where T : IEvent

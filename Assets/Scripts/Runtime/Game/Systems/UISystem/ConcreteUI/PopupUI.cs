@@ -15,7 +15,7 @@ namespace Nara.System.UI
         }
         private void OnCloseBtnClick(ClickEvent evt)
         {
-            GameApp.Inteface.GetSystem<EventBus>().Raise(new ClosePopupEvent(this));
+            GameApp.Interface.GetSystem<EventBus>().Raise(new ClosePopupEvent(this));
         }
     }
 }

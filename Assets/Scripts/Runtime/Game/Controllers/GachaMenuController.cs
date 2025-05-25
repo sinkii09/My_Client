@@ -16,14 +16,14 @@ namespace Nara.Game.Controller
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         protected override void LateStart()
         {
-            _gachaSystem = GameApp.Inteface.GetSystem<GachaSystem>();
+            _gachaSystem = GameApp.Interface.GetSystem<GachaSystem>();
             _gachaSystem.LoadCharacterPool(_characterGachaData.Pool,_characterGachaData.RarityProbabilities);
         }
 
         [Button]
         public void Gacha()
         {
-            var result = GameApp.Inteface.SendCommand(new RollGachaCommand());
+            var result = GameApp.Interface.SendCommand(new RollGachaCommand());
             Debug.Log($"Gacha Result: {result.ResultCharId}");
         }
     }

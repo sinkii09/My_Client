@@ -553,6 +553,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: 1
   snap: 0
+  ease: 1
 --- !u!1 &1825003757
 GameObject:
   m_ObjectHideFlags: 0
@@ -641,7 +642,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 008547c84b439c942a7a63ecb0a9fefd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serviceConfig: {fileID: 11400000, guid: 08b9aa930059d6e449bd739e9b6bf239, type: 2}
+  _globalConfig: {fileID: 11400000, guid: 08b9aa930059d6e449bd739e9b6bf239, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

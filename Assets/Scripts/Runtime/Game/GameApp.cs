@@ -13,9 +13,9 @@ namespace Nara.Game
         EventBus _eventBus;
         protected override void LateStart()
         {
-            _eventBus = Inteface.GetSystem<EventBus>();
+            _eventBus = Interface.GetSystem<EventBus>();
 
-            _eventBus.Register(new EventBinding<QuitGameEvent>(OnQuitGame));
+            //_eventBus.Register(new EventBinding<QuitGameEvent>(OnQuitGame));
         }
         protected override void OnTerminate()
         {

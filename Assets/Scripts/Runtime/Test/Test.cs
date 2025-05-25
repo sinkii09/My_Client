@@ -17,8 +17,8 @@ public class Test : NaraBehaviour
     {
         binding = new EventBinding<TestEvent>(OnTestEvent);
 
-        _eventBus = GameApp.Inteface.GetSystem<EventBus>();
-        _eventBus.Register(binding);
+        _eventBus = GameApp.Interface.GetSystem<EventBus>();
+        //_eventBus.Register(binding);
     }
     private void OnDestroy()
     {

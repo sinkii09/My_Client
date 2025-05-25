@@ -1,4 +1,4 @@
-﻿using Nara.Patterns;
+﻿using Nara.Game.Config;
 using UnityEngine;
 
 namespace Nara.Game
@@ -6,11 +6,11 @@ namespace Nara.Game
     public class Bootstraper : MonoBehaviour
     {
         [SerializeField]
-        private ServiceConfigSO serviceConfig;
+        private GlobalConfig _globalConfig;
 
         private void Awake()
         {
-            GameApp.Instance.StartGame(serviceConfig);
+            GameApp.Instance.StartGame(_globalConfig);
         }
     }
 }

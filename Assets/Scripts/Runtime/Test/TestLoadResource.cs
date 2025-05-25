@@ -8,7 +8,7 @@ public class TestLoadResource : MonoBehaviour
     [Button]
     public void LoadResource()
     {
-        var agentManagementSystem = GameApp.Inteface.GetSystem<AgentManagementSystem>();
+        var agentManagementSystem = GameApp.Interface.GetSystem<AgentManagementSystem>();
         agentManagementSystem.LoadAllAgentDataAsync();
     }
 }
