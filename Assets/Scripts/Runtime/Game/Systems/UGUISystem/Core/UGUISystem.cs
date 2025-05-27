@@ -10,6 +10,8 @@ namespace Nara.System.UGUISystems
 {
     public class UGUISystem : BaseSystem
     {
+        private const int MAX_POOL_SIZE = 10;   
+        
         private Dictionary<UIType, Stack<UIHandler>> _uiPools;
         private Dictionary<UIType, Stack<UIHandler>> _openUI;
 
@@ -58,10 +60,12 @@ namespace Nara.System.UGUISystems
             {
                 _uiPools[uiType] = new Stack<UIHandler>();
                 handler = Object.Instantiate(prefab);
+                handler.Initialize();
             }
             else if (!pool.TryPop(out handler) || handler == null)
             {
                 handler = Object.Instantiate(prefab);
+                handler.Initialize();
             }
 
             handler.Show(@event.Context);
@@ -91,11 +95,22 @@ namespace Nara.System.UGUISystems
             }
 
             _openUI[handler.UIType].Pop();
-            handler.HideImmediately();
-
             if (_uiPools.TryGetValue(handler.UIType, out var pool))
             {
                 pool.Push(handler);
+                ShrinkPool(pool);
+            }
+        }
+
+        private void ShrinkPool(Stack<UIHandler> pool)
+        {
+            while (pool.Count > MAX_POOL_SIZE)
+            {
+                var handler = pool.Pop();
+                if (handler != null)
+                {
+                    Object.Destroy(handler.gameObject);
+                }
             }
         }
     }

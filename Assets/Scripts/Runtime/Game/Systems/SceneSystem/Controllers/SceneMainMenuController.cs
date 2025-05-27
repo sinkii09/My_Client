@@ -1,10 +1,9 @@
-﻿using Nara.Core.Architecture;
+﻿using Cysharp.Threading.Tasks;
 using Nara.Game;
 using Nara.Game.Enum;
 using Nara.Game.Event;
-using Nara.Patterns;
-using Nara.System.UGUISystems;
 using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace Nara.System.Scene
 {
@@ -13,41 +12,42 @@ namespace Nara.System.Scene
         public override SceneType SceneType => SceneType.MainMenu;
 
         private EventBus _eventBusSystem;
-        private UGUISystem _uiSystem;
 
-        private EventBinding<StartGameEvent> _startGameEventBinding;
         protected override void LateStart()
         {
 
             RegisterSystem();
 
-            //_startGameEventBinding = new EventBinding<StartGameEvent>(OnGameStart);
-            //_eventBusSystem.Register(_startGameEventBinding);
+            _eventBusSystem.Register<StartGameEvent>(OnGameStart);
+
+            ShowUI();
         }
 
         private void RegisterSystem()
         {
             _eventBusSystem = GameApp.Interface.GetSystem<EventBus>();
-            _uiSystem = GameApp.Interface.GetSystem<UGUISystem>();
         }
 
-        private void OnGameStart(StartGameEvent @event)
+        private void OnGameStart(StartGameEvent evt)
         {
-            //SceneManager.LoadSceneAsync(SceneTypeExtensions.GetSceneName(SceneType.MapSelection));
+            evt.OnAnimationComplete?.Invoke().ContinueWith(() =>
+            {
+                Debug.Log("Game started from Main Menu");
+            });
         }
 
         [Button("Test")]
         private void ShowUI()
         {
             ShowUIEvent showUIEvent = new ShowUIEvent(UIType.MainMenu, null);
-            _uiSystem.ShowUI(showUIEvent);
+            _eventBusSystem.Raise(showUIEvent);
         }
 
         [Button("Show Popup")]
         private void ShowPopup()
         {
             ShowUIEvent showUIEvent = new ShowUIEvent(UIType.Popup, null);
-            _uiSystem.ShowUI(showUIEvent);
+            _eventBusSystem.Raise(showUIEvent);
         }
     }
 }

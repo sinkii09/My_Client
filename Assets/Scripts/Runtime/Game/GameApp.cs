@@ -1,4 +1,5 @@
 using Nara.Core.Architecture;
+using Nara.Game.Event;
 using Nara.Game.Model;
 using Nara.Game.System;
 using Nara.Patterns;

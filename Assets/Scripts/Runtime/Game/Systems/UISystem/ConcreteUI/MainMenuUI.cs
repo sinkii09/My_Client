@@ -1,5 +1,6 @@
 using Nara.Game;
 using Nara.Game.Enum;
+using Nara.Game.Event;
 using System;
 using UnityEngine;
 using UnityEngine.UIElements;
