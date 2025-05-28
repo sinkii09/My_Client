@@ -13,19 +13,16 @@ namespace Nara.System.Scene
 
         private EventBus _eventBusSystem;
 
-        protected override void LateStart()
-        {
-
-            RegisterSystem();
-
-            _eventBusSystem.Register<StartGameEvent>(OnGameStart);
-
-            ShowUI();
-        }
-
-        private void RegisterSystem()
+        protected override void RegisterSystem()
         {
             _eventBusSystem = GameApp.Interface.GetSystem<EventBus>();
+
+            _eventBusSystem.Register<StartGameEvent>(OnGameStart);
+        }
+
+        protected override void StartScene()
+        {
+            ShowMenuUI();
         }
 
         private void OnGameStart(StartGameEvent evt)
@@ -33,11 +30,12 @@ namespace Nara.System.Scene
             evt.OnAnimationComplete?.Invoke().ContinueWith(() =>
             {
                 Debug.Log("Game started from Main Menu");
+                _ = ChangeSceneAsync(SceneType.Gameplay);
             });
         }
 
         [Button("Test")]
-        private void ShowUI()
+        private void ShowMenuUI()
         {
             ShowUIEvent showUIEvent = new ShowUIEvent(UIType.MainMenu, null);
             _eventBusSystem.Raise(showUIEvent);
@@ -48,6 +46,10 @@ namespace Nara.System.Scene
         {
             ShowUIEvent showUIEvent = new ShowUIEvent(UIType.Popup, null);
             _eventBusSystem.Raise(showUIEvent);
+        }
+
+        protected override void LoadScene()
+        {
         }
     }
 }

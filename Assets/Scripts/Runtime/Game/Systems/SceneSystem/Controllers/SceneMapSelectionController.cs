@@ -32,5 +32,9 @@ namespace Nara.System.Scene
                 Debug.Log($"Map: {map.Value.MapData.MapType}");
             }
         }
+
+        protected override void LoadScene()
+        {
+        }
     }
 }

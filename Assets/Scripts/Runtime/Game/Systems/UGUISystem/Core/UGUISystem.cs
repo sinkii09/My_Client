@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using Nara.Core.Architecture;
 using Nara.Game;
 using Nara.Game.Config;
@@ -102,6 +103,14 @@ namespace Nara.System.UGUISystems
             }
         }
 
+        public async UniTask HideUI(UIType uiType)
+        {
+            if (_openUI.TryGetValue(uiType, out var uiStack) && uiStack.Count > 0)
+            {
+                var handler = uiStack.Pop();
+                await handler.HideAsync();
+            }
+        }
         private void ShrinkPool(Stack<UIHandler> pool)
         {
             while (pool.Count > MAX_POOL_SIZE)
