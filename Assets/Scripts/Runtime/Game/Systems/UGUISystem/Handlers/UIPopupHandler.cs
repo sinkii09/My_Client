@@ -11,7 +11,6 @@ namespace Nara.Game.UI
     {
         public override UIType UIType => UIType.Popup;
         public override bool CanHaveMultiple => true;
-        public override bool IsOpen { get; protected set; }
 
         [SerializeField]
         private Button _hideButton;
@@ -36,7 +35,7 @@ namespace Nara.Game.UI
             }
         }
 
-        public override void Initialize()
+        protected override void OnInitialize()
         {
 
         }
@@ -44,6 +43,8 @@ namespace Nara.Game.UI
         protected override void ResetUIState()
         {
             _popupPanel.localScale = Vector3.one;
+
+            _hideButton.interactable = true;
         }
 
         public override void OnShow()
@@ -71,12 +72,14 @@ namespace Nara.Game.UI
                     .SetDelay(.05f)
                     .SetUpdate(true);
 
-            return 0.25f; // Return the duration of the hide animation
+            return 0.3f; // Return the duration of the hide animation
         }
 
         private void OnHideButtonClicked()
         {
+            _hideButton.interactable = false; // Disable the button to prevent multiple clicks
             _ = HideAsync();
         }
+
     }
 }

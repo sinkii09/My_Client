@@ -19,8 +19,6 @@ namespace Nara.Game.UI
 
         public override bool CanHaveMultiple => false;
 
-        public override bool IsOpen { get; protected set; }
-
         [SerializeField]
         private Button _playButton;
         [SerializeField]
@@ -52,7 +50,7 @@ namespace Nara.Game.UI
 
         #endregion
 
-        public override void Initialize()
+        protected override void OnInitialize()
         {
             // Store original states
             _originMenuPanelPosition = _menuPanel.anchoredPosition;
@@ -104,11 +102,13 @@ namespace Nara.Game.UI
 
         private void OnHideButtonClicked()
         {
+            _hideButton.interactable = false;
             _ = HideAsync();
         }
 
         private void OnPlayButtonClicked()
         {
+            _playButton.interactable = false;
             StartGameEvent startGameEvent = new StartGameEvent()
             {
                 OnAnimationComplete = HideAsync
@@ -226,6 +226,9 @@ namespace Nara.Game.UI
                 rect.anchoredPosition = _originButtonPositions[i];
                 rect.localScale = _originButtonScales[i];
             }
+
+            _hideButton.interactable = true;
+            _playButton.interactable = true;
         }
     }
 }

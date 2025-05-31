@@ -10,14 +10,13 @@ namespace Nara.Game.UI
     {
         public override UIType UIType => UIType.TransitionScreen;
         public override bool CanHaveMultiple => false;
-        public override bool IsOpen { get; protected set; }
 
         [SerializeField]
         private Image _transitionImage;
 
         [SerializeField]
         private CanvasGroup _canvasGroup;
-        public override void Initialize()
+        protected override void OnInitialize()
         {
             _transitionImage.color = new Color(0, 0, 0, 0);
         }

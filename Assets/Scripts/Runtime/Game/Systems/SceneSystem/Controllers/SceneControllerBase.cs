@@ -1,8 +1,10 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Nara.Game.Enum;
+using Nara.Game.Extensions;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Nara.System.Scene
@@ -28,11 +30,11 @@ namespace Nara.System.Scene
         {
 
         }
-        protected abstract void LoadScene();
-        protected async UniTask ChangeSceneAsync(SceneType sceneType)
+
+        protected async UniTask LoadSceneAsync(SceneType sceneType, LoadSceneMode loadMode = LoadSceneMode.Single)
         {
             await FadeInAsync();
-            LoadScene();
+            await SceneManager.LoadSceneAsync(SceneTypeExtensions.GetSceneName(sceneType), loadMode);
         }
         protected async UniTask FadeInAsync(float duration = 0.5f)
         {
@@ -57,7 +59,7 @@ namespace Nara.System.Scene
             }
 
             _screenTransitionImage.color = Color.black;
-            Debug.Log($"Fading out with duration: {duration}");
+
             await _screenTransitionImage.DOFade(0f, duration)
                                 .SetEase(Ease.InOutQuad)
                                 .SetUpdate(true)

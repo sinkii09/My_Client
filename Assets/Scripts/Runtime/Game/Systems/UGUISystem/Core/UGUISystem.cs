@@ -4,6 +4,7 @@ using Nara.Game;
 using Nara.Game.Config;
 using Nara.Game.Enum;
 using Nara.Game.Event;
+using Nara.System.Pool;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,17 +12,14 @@ namespace Nara.System.UGUISystems
 {
     public class UGUISystem : BaseSystem
     {
-        private const int MAX_POOL_SIZE = 10;   
-        
-        private Dictionary<UIType, Stack<UIHandler>> _uiPools;
         private Dictionary<UIType, Stack<UIHandler>> _openUI;
 
         private UGUIConfig _uiConfig;
 
         private EventBus _eventBus;
+        private PoolSystem _poolSystem;
         protected override bool OnInit()
         {
-            _uiPools = new Dictionary<UIType, Stack<UIHandler>>();
             _openUI = new Dictionary<UIType, Stack<UIHandler>>();
 
             _uiConfig = GameApp.Interface.GetConfig<UGUIConfig>();
@@ -31,7 +29,7 @@ namespace Nara.System.UGUISystems
                 Debug.LogError("[UGUI System] UGUIConfigSO not found in Resources/Configs/UGUIConfig");
                 return false;
             }
-
+            _poolSystem = GameApp.Interface.GetSystem<PoolSystem>();
             _eventBus = GameApp.Interface.GetSystem<EventBus>();
 
             _eventBus.Register<HideUIEvent>(HideUI);
@@ -55,20 +53,13 @@ namespace Nara.System.UGUISystems
                 if (uiStack.Peek().CanHaveMultiple == false) return;
             }
 
-            UIHandler handler = null;
+            UIHandler handler = _poolSystem.Get(prefab);
 
-            if (!_uiPools.TryGetValue(uiType, out var pool))
+            if (!handler.IsInitialized)
             {
-                _uiPools[uiType] = new Stack<UIHandler>();
-                handler = Object.Instantiate(prefab);
                 handler.Initialize();
             }
-            else if (!pool.TryPop(out handler) || handler == null)
-            {
-                handler = Object.Instantiate(prefab);
-                handler.Initialize();
-            }
-
+            Debug.Log($"Showing UIHandler for {uiType}");
             handler.Show(@event.Context);
 
             if (!_openUI.TryGetValue(uiType, out uiStack))
@@ -96,11 +87,9 @@ namespace Nara.System.UGUISystems
             }
 
             _openUI[handler.UIType].Pop();
-            if (_uiPools.TryGetValue(handler.UIType, out var pool))
-            {
-                pool.Push(handler);
-                ShrinkPool(pool);
-            }
+
+            var prefab = _uiConfig.UIHandlers[handler.UIType];
+            _poolSystem.Release(handler, prefab);
         }
 
         public async UniTask HideUI(UIType uiType)
@@ -109,17 +98,6 @@ namespace Nara.System.UGUISystems
             {
                 var handler = uiStack.Pop();
                 await handler.HideAsync();
-            }
-        }
-        private void ShrinkPool(Stack<UIHandler> pool)
-        {
-            while (pool.Count > MAX_POOL_SIZE)
-            {
-                var handler = pool.Pop();
-                if (handler != null)
-                {
-                    Object.Destroy(handler.gameObject);
-                }
             }
         }
     }

@@ -30,7 +30,7 @@ namespace Nara.System.Scene
             evt.OnAnimationComplete?.Invoke().ContinueWith(() =>
             {
                 Debug.Log("Game started from Main Menu");
-                _ = ChangeSceneAsync(SceneType.Gameplay);
+                _ = LoadSceneAsync(SceneType.Gameplay);
             });
         }
 
@@ -46,10 +46,6 @@ namespace Nara.System.Scene
         {
             ShowUIEvent showUIEvent = new ShowUIEvent(UIType.Popup, null);
             _eventBusSystem.Raise(showUIEvent);
-        }
-
-        protected override void LoadScene()
-        {
         }
     }
 }

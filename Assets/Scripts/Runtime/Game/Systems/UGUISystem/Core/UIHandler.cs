@@ -1,7 +1,9 @@
 ﻿using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using Nara.Game;
 using Nara.Game.Enum;
 using Nara.Game.Event;
+using Nara.System.Pool;
 using System;
 using System.Threading;
 using UnityEngine;
@@ -12,17 +14,23 @@ namespace Nara.System.UGUISystems
     {
 
     }
-    public abstract class UIHandler : NaraBehaviour
+    public abstract class UIHandler : NaraBehaviour, IPoolable
     {
         public abstract UIType UIType { get; }
         public abstract bool CanHaveMultiple { get; }
-        public abstract bool IsOpen { get; protected set; }
         public abstract void OnShow();
         public abstract float OnHide();
+        public bool IsOpen { get; protected set; }
+        public bool IsInitialized { get; protected set; }
 
         protected IUIContext _context;
 
-        public virtual void Initialize()
+        public void Initialize()
+        {
+            OnInitialize();
+            IsInitialized = true;
+        }
+        protected virtual void OnInitialize()
         {
             
         }
@@ -67,5 +75,26 @@ namespace Nara.System.UGUISystems
         {
 
         }
+
+        public void OnCreate()
+        {
+            gameObject.SetActive(false);
+        }
+
+        public void OnGet()
+        {
+        }
+
+        public void OnRelease()
+        {
+
+        }
+
+        public virtual void OnDestroyByPool()
+        {
+            DOTween.Kill(gameObject);
+            Destroy(gameObject);
+        }
+
     }
 }
